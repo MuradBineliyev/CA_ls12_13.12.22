@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    
+    const instance = axios.create({
+        baseURL: 'https://northwind.vercel.app/api/',
+    });
+
+    // Axios ile bir adet customer ekle
+    function addCustommerAxios(){
+
+        let addCustomer = {
+            "companyName": "MURAD MMC",
+            "contactName": "Muraddidana",
+            "address": {
+                "street": "kuce",
+                "city": "ureyin hara isteyir",
+                "country": "Azeri torpaginin hamimiz evladiyiq",
+                "phone": "055"
+                }
+            }
+
+        instance.post("/customers",addCustomer)
+        .then(res => console.log(res.data.id))
+    }
+
+    // Axios ile bir adet customer güncelle - PUT
+
+    function updateCustomer(id){
+        let addCustomer = {
+            "companyName": "MURAD BNL MMC",
+            "contactName": "Muraddidanaaaa"
+        }
+        
+        instance.put(`/customers/${id}`,addCustomer)
+        .then(res => console.log(res))
+
+    }
+
+    function deleteCustomer(id){
+        // instance.get(`/customers/${id}`)
+        // .then(x => console.log(x));
+
+        instance.delete(`/customers/${id}`)
+        .then(res => console.log(res));
+    }
+    </script>
+</body>
+</html>
